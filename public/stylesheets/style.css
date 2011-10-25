@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+.hor-minimalist-a {
+    width: 800px;
+}
+th.time {
+    width: 200px;
+}
+th.project {
+    width: 150px;
+}
+th.description {
+    width: 400px;
+}
+th.fragment {
+    width: 50px;
+}

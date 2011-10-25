@@ -1,5 +1,5 @@
 
-define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/TimeFragmentView'], function(TimeFragment, TimeFragmentCollection, TimeFragmentView){
+define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/TimeFragmentView', 'lib/xdate'], function(TimeFragment, TimeFragmentCollection, TimeFragmentView){
 
     var CollectionView = Backbone.View.extend({
         /**
@@ -13,7 +13,7 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
              */
             this.currentTimeFragment = new TimeFragment();
             this.currentTimeFragment.bind('change:startTime', this.updateCurrentTime, this);
-            var currentTime = Date(); 
+            var currentTime = XDate(); 
             this.currentTimeFragment.set({startTime: currentTime});
 
 
@@ -33,7 +33,7 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
         },
         updateCurrentTime: function(model){
             console.log('update the current time');
-            this.$('.start-time').html(model.get('startTime'));
+            this.$('.start-time').html(model.get('startTime').toString('HH:mm'));
         },
 
 
@@ -49,12 +49,11 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
          * creat a new one whose start time is current time
          */
         stopTime: function() {
-            console.log('stopTime');
-            var currentTime = Date();
+            var currentTime = XDate();
             this.currentTimeFragment.set({endTime: currentTime});
-            //console.log(this.currentTimeFragment);
             var timeFragment = new TimeFragment(this.currentTimeFragment.toJSON());
             this.timeFragmentCollection.add(timeFragment);
+            this.currentTimeFragment.set({startTime: currentTime});
         },
         changeNode: function() {
             console.log('change note');
