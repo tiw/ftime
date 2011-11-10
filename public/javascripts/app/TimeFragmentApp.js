@@ -3,7 +3,7 @@ define(['text!templates/time-fragment/time-fragment-list.html','app/view/TimeFra
     App.prototype.startup = function(){
         $('body').append(List);
         var timeFragmentCollectionView = new TimeFragmentCollectionView();
-    }
+    };
 
     return App;
-})
+});

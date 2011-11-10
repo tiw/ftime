@@ -52,6 +52,7 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             var currentTime = XDate();
             this.currentTimeFragment.set({endTime: currentTime});
             var timeFragment = new TimeFragment(this.currentTimeFragment.toJSON());
+            timeFragment.save();
             this.timeFragmentCollection.add(timeFragment);
             this.currentTimeFragment.set({startTime: currentTime});
         },
