@@ -31,12 +31,12 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             console.log(timeFragmentView.render().el);
             this.$('.time-fragment-list').append(timeFragmentView.render().el);
         },
-        updateCurrentTime: function(model){
+        updateCurrentTime: function(model) {
             console.log('update the current time');
-            this.$('.start-time').html(model.get('startTime').toString('HH:mm'));
+            this.$('.start-time').html(
+                model.get('startTime').toString('HH:mm')
+            );
         },
-
-
 
         events: {
             'click .stop-time': 'stopTime',
@@ -51,7 +51,8 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
         stopTime: function() {
             var currentTime = XDate();
             this.currentTimeFragment.set({endTime: currentTime});
-            var timeFragment = new TimeFragment(this.currentTimeFragment.toJSON());
+            var timeFragment =
+                new TimeFragment(this.currentTimeFragment.toJSON());
             timeFragment.save();
             this.timeFragmentCollection.add(timeFragment);
             this.currentTimeFragment.set({startTime: currentTime});
@@ -64,13 +65,7 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             console.log('change project');
             this.currentTimeFragment.set({project: this.$('.project').val()});
         }
-    
     });
-    
     return CollectionView;
 
-
-
-
-
-})
+});
