@@ -29,10 +29,11 @@ class Application_Model_TimeFragment extends Tiddr_Model_Abstract
         }
     }
 
-    //public function findAll()
-    //{
-        //return $this->_table->fetchAll();
-    //}
+    public static function findAll()
+    {
+        $table = new Application_Model_DbTable_TimeFragment();
+        return $table->fetchAll();
+    }
 
 }
 

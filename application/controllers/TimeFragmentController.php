@@ -45,5 +45,30 @@ class TimeFragmentController extends Tiddr_Controller_Action
         
         return array_key_exists($key, $data)?$data[$key]:null;
     }
+    public function _findAll()
+    {
+        try {
+            $timeFragments = Application_Model_TimeFragment::findAll();
+        } catch (Exception $e) {
+            return array(
+                'status' => 'error',
+                'message' => $e->getMessage()
+            );
+        }
+        $data = array();
+        foreach ($timeFragments as $tf) {
+            $d = array(
+                'id' => $tf->id, 'project' => $tf->project,
+                'start_time' => $tf->start_time,
+                'end_time' => $tf->end_time,
+                'note' => $tf->note
+            );
+            $data[] = $d;
+        }
+        return array(
+            'status' => 'ok',
+            'data' => $data
+        );
+    }
 }
 

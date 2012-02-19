@@ -7,7 +7,6 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
          */
         initialize: function(){
             this.el = $('#ftime-app');
-            console.log('ini collection view');
             /**
              * ini current time fragment 
              */
@@ -22,17 +21,20 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
              */
             this.timeFragmentCollection = new TimeFragmentCollection();
             this.timeFragmentCollection.bind('add', this.addOne, this);
+            this.timeFragmentCollection.bind('reset', this.addAll, this);
 
             this.delegateEvents();
+            this.timeFragmentCollection.fetch();
         },
         addOne: function(model) {
-            console.log('add one', model);
             var timeFragmentView = new TimeFragmentView({model: model});
-            console.log(timeFragmentView.render().el);
             this.$('.time-fragment-list').append(timeFragmentView.render().el);
         },
+        addAll: function() {
+            console.log(this.timeFragmentCollection);
+            this.timeFragmentCollection.each(this.addOne);
+        },
         updateCurrentTime: function(model) {
-            console.log('update the current time');
             this.$('.start-time').html(
                 model.get('startTime').toString('HH:mm')
             );
@@ -65,11 +67,11 @@ define(['app/model/TimeFragment', 'app/model/TimeFragmentCollection', 'app/view/
             this.currentTimeFragment.set({startTime: currentTime});
         },
         changeNode: function() {
-            console.log('change note');
+            //console.log('change note');
             this.currentTimeFragment.set({note: this.$('.note').val()});
         },
         changeProject: function() {
-            console.log('change project');
+            //console.log('change project');
             this.currentTimeFragment.set({project: this.$('.project').val()});
         }
     });
